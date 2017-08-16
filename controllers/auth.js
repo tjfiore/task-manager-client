@@ -19,7 +19,7 @@ exports.signup = (req, res, next) => {
     const password = req.body.password;
 
     if(!email || !password) {
-        return res.status(422).send({ error: 'You must provide email and password' });
+        return res.status(422).json({ error: 'You must provide email and password' });
     }
 
     // See if a user wth the given email exists
@@ -30,7 +30,7 @@ exports.signup = (req, res, next) => {
         // If a user with email does exist, return an error
         if(existingUser) {
             // 422 rsponse means unprocessable request
-            return res.status(422).send({ error: 'Email already existed' });
+            return res.status(422).json({ error: 'Email already existed' });
         }
 
         // If a user with email !exist, create and save user record
