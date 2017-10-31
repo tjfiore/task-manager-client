@@ -1,4 +1,5 @@
 const Auth = require('./controllers/auth');
+const Task = require('./controllers/task');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -11,6 +12,7 @@ module.exports = function (app) {
     });
 
     app.post('/signin', requireSignin, Auth.signin);
-
     app.post('/signup', Auth.signup);
+    app.post('/task', Task.addTask);
+    app.get('/task', Task.getTasks);
 }

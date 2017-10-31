@@ -11,10 +11,13 @@ function tokenForUser(user) {
 exports.signin = (req, res, next) => {
     // User has already had theor email and password auth'd
     // We just need to give them a token
-    res.send({ token: tokenForUser(req.user) });
+    res.send({ token: tokenForUser(req.user), user: req.user });
 };
 
 exports.signup = (req, res, next) => {
+    const username = req.body.username;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     const email = req.body.email;
     const password = req.body.password;
 
@@ -35,6 +38,9 @@ exports.signup = (req, res, next) => {
 
         // If a user with email !exist, create and save user record
         const user = new User({
+            username: username,
+            firstname: firstname,
+            lastname: lastname,
             email: email,
             password: password
         });
